@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu · GAMRA — Restaurant Tunisien à Salakta</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#081420;--bg2:#0c1c2e;--panel:#102a44;--blue:#1e6f9c;--blue2:#3aa0d4;
+    --gold:#2ab6e8;--gold2:#7ee0ff;--coral:#e8734a;--text:#f3f2ec;--muted:#93a8bd;--line:rgba(255,255,255,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;line-height:1.6;
+    background:linear-gradient(rgba(8,20,32,.9),rgba(8,20,32,.94)), url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=1600&q=80') center/cover fixed;}
+  body.ar{font-family:'Cairo',sans-serif}
+  ::selection{background:rgba(58,160,212,.4)}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+  h1,h2,h3,.disp{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;line-height:1}
+  body.ar h1,body.ar h2,body.ar h3,body.ar .disp{font-family:'Cairo',sans-serif;font-weight:800;text-transform:none;letter-spacing:0}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:200;transition:all .4s;padding:20px 0;background:rgba(8,20,32,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+  nav.scrolled{padding:12px 0}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1240px;margin:0 auto;padding:0 32px}
+  .logo{font-family:'Anton',sans-serif;font-size:28px;letter-spacing:1px;display:flex;align-items:center;gap:6px;direction:ltr}
+  .logo .g{color:var(--gold)}
+  .logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:6px}
+  .nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+  .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .25s}
+  body.ar .nav-links a{text-transform:none;letter-spacing:0;font-weight:700}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+  .nav-tel{background:var(--gold);color:#052033 !important;padding:11px 22px;border-radius:50px;font-weight:700 !important;transition:transform .2s,background .2s;white-space:nowrap}
+  .nav-tel:hover{background:var(--gold2);transform:translateY(-1px)}
+  .langsw{display:flex;gap:4px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:50px;padding:4px}
+  .langsw button{border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px;padding:7px 13px;border-radius:50px;cursor:pointer;font-family:inherit;transition:all .2s}
+  .langsw button.active{background:var(--gold);color:#052033}
+
+  /* BANNER */
+  .banner{position:relative;overflow:hidden;padding:170px 0 70px;text-align:center}
+  .banner-bg{position:absolute;inset:0;background:url('img/pasta-rejer.png') center/cover;opacity:.22}
+  .banner-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,32,.7),rgba(8,20,32,.95))}
+  .banner-in{position:relative;z-index:2}
+  .eye{color:var(--gold);font-size:13px;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+  body.ar .eye{text-transform:none;letter-spacing:0}
+  .eye::before,.eye::after{content:"✦";color:var(--gold2);margin:0 8px;font-size:11px;opacity:.8}
+  .banner h1{font-size:clamp(46px,9vw,96px)}
+  .banner h1 .g{color:var(--gold)}
+  .banner p{color:var(--muted);max-width:560px;margin:18px auto 0}
+
+  /* ZELLIGE */
+  .zellige{height:46px;background-color:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 3 L57 30 L30 57 L3 30 Z' fill='none' stroke='%232ab6e8' stroke-width='1.3' opacity='0.45'/%3E%3Ccircle cx='30' cy='30' r='3.5' fill='%237ee0ff' opacity='0.5'/%3E%3Cpath d='M30 3 L30 57 M3 30 L57 30' stroke='%232ab6e8' stroke-width='.7' opacity='0.25'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;background-size:46px 46px;background-position:center}
+
+  /* CATEGORY PILLS */
+  .cats{position:sticky;top:64px;z-index:100;background:rgba(8,20,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 0}
+  .cats-in{display:flex;gap:10px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
+  .cats-in::-webkit-scrollbar{display:none}
+  .cats a{white-space:nowrap;color:#d9e3ec;text-decoration:none;font-size:13px;font-weight:600;padding:9px 18px;border-radius:50px;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:all .2s}
+  .cats a:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* MENU SECTIONS */
+  .msec{padding:70px 0 10px;scroll-margin-top:130px}
+  .msec-head{display:flex;align-items:center;gap:18px;margin-bottom:34px}
+  .msec-head .ic{flex:none;width:56px;height:56px;border-radius:16px;background:rgba(42,182,232,.14);display:grid;place-items:center;font-size:27px}
+  .msec-head h2{font-size:clamp(28px,4vw,42px)}
+  .msec-head h2 .g{color:var(--gold)}
+  .msec-head .sub{color:var(--muted);font-size:14px;margin-top:4px}
+
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:6px 50px}
+  .item{display:flex;align-items:baseline;gap:12px;padding:16px 0;border-bottom:1px dashed var(--line)}
+  .item .nm{font-weight:600;font-size:16px;color:var(--text)}
+  .item .ds{color:var(--muted);font-size:13px;margin-top:3px}
+  .item .dots{flex:1;border-bottom:1px dotted rgba(255,255,255,.18);transform:translateY(-4px);min-width:20px}
+  .item .pr{font-family:'Anton',sans-serif;font-size:20px;color:var(--gold2);white-space:nowrap}
+  body.ar .item .pr{font-family:'Cairo',sans-serif;font-weight:800}
+  .item .tag2{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(42,182,232,.4);border-radius:50px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+  body.ar .item .tag2{text-transform:none}
+
+  .note{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden;border-radius:32px;padding:70px 40px;text-align:center;border:1px solid var(--line);margin:40px 0 90px}
+  .cta-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1600&q=85') center/cover;opacity:.3}
+  .cta-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,32,.82),rgba(8,20,32,.92))}
+  .cta-in{position:relative;z-index:2}
+  .cta h2{font-size:clamp(30px,5vw,52px)}
+  .cta h2 .g{color:var(--gold)}
+  .cta p{color:#c7d6e3;max-width:480px;margin:16px auto 30px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 38px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.5px;cursor:pointer;border:none;font-family:inherit;transition:transform .2s,filter .2s;margin:0 6px}
+  .btn-main{background:linear-gradient(120deg,var(--gold),var(--gold2));color:#052033}
+  .btn-out{border:1px solid rgba(255,255,255,.25);color:var(--text);background:rgba(255,255,255,.03)}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+  footer{background:#050d16;padding:56px 0 30px;border-top:1px solid var(--line);text-align:center}
+  .f-logo{font-family:'Anton',sans-serif;font-size:32px;margin-bottom:12px;direction:ltr}
+  body.ar .f-logo{font-family:'Cairo',sans-serif;font-weight:900}
+  .f-logo .g{color:var(--gold)}
+  footer p{color:var(--muted);font-size:14px}
+  .f-bottom{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);color:#4c5d70;font-size:13px}
+
+  .rev{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .rev.in{opacity:1;transform:none}
+
+  @media(max-width:820px){ .nav-links a:not(.nav-tel){display:none} .items{grid-template-columns:1fr;gap:0} }
+  @media(max-width:600px){ .wrap{padding:0 20px} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="logo">
+      <a href="index.html">
+        <svg viewBox="0 0 100 100" fill="var(--gold)" style="width:24px;height:24px;flex:none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="44" y="6" width="12" height="42" rx="6"/>
+          <rect x="30" y="13" width="11" height="38" rx="5.5" transform="rotate(-8 35.5 32)"/>
+          <rect x="59" y="13" width="11" height="38" rx="5.5" transform="rotate(8 64.5 32)"/>
+          <rect x="10" y="46" width="12" height="28" rx="6" transform="rotate(-45 16 60)"/>
+          <rect x="78" y="46" width="12" height="28" rx="6" transform="rotate(45 84 60)"/>
+          <ellipse cx="50" cy="68" rx="22" ry="27"/>
+          <g fill="#7ee0ff"><ellipse cx="50" cy="56" rx="3" ry="6.5"/><ellipse cx="50" cy="80" rx="3" ry="6.5"/><ellipse cx="38" cy="68" rx="6.5" ry="3"/><ellipse cx="62" cy="68" rx="6.5" ry="3"/><ellipse cx="41.5" cy="59.5" rx="2.8" ry="5.5" transform="rotate(45 41.5 59.5)"/><ellipse cx="58.5" cy="59.5" rx="2.8" ry="5.5" transform="rotate(-45 58.5 59.5)"/><ellipse cx="41.5" cy="76.5" rx="2.8" ry="5.5" transform="rotate(-45 41.5 76.5)"/><ellipse cx="58.5" cy="76.5" rx="2.8" ry="5.5" transform="rotate(45 58.5 76.5)"/><circle cx="50" cy="68" r="4.8"/></g>
+          <circle cx="50" cy="68" r="2.1" fill="#2ab6e8"/>
+        </svg>
+        <span><span class="g">GA</span>MRA</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" data-fr="Accueil" data-en="Home" data-ar="الرئيسية">Accueil</a></li>
+      <li><a href="menu.html" class="active" data-fr="Menu" data-en="Menu" data-ar="القائمة">Menu</a></li>
+      <li><a href="index.html#apropos" data-fr="À propos" data-en="About" data-ar="من نحن">À propos</a></li>
+      <li><a href="index.html#galerie" data-fr="Galerie" data-en="Gallery" data-ar="معرض الصور">Galerie</a></li>
+      <li><a href="index.html#contact" data-fr="Nous trouver" data-en="Find us" data-ar="موقعنا">Nous trouver</a></li>
+      <li><a class="nav-tel" href="tel:+21600000000">📞 +216 00 000 000</a></li>
+      <li class="langsw">
+        <button data-lang="fr" class="active">FR</button>
+        <button data-lang="ar">AR</button>
+        <button data-lang="en">EN</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<header class="banner">
+  <div class="banner-bg"></div>
+  <div class="banner-in wrap">
+    <div class="eye" data-fr="Notre carte" data-en="Our menu" data-ar="قائمتنا">Notre carte</div>
+    <h1 data-fr='Le <span class="g">menu</span>' data-en='The <span class="g">menu</span>' data-ar='<span class="g">القائمة</span>'>Le <span class="g">menu</span></h1>
+    <p data-fr="Poissons & fruits de mer, chapati, mlawi, pâtes et spécialités tunisiennes. Exemple de carte — les plats et prix seront mis à jour prochainement." data-en="Fish & seafood, chapati, mlawi, pasta and Tunisian specialties. Sample menu — dishes and prices will be updated soon." data-ar="أسماك ومأكولات بحرية، شاباتي، ملاوي، معكرونة وأطباق تونسية. قائمة تجريبية — سيتم تحديث الأطباق والأسعار قريباً.">Poissons & fruits de mer, chapati, mlawi, pâtes et spécialités tunisiennes. Exemple de carte — les plats et prix seront mis à jour prochainement.</p>
+  </div>
+</header>
+
+<div class="zellige"></div>
+
+<!-- CATEGORY PILLS -->
+<div class="cats">
+  <div class="cats-in wrap">
+    <a href="#poissons" data-fr="🐟 Poissons" data-en="🐟 Fish" data-ar="🐟 أسماك">🐟 Poissons</a>
+    <a href="#fruitsdemer" data-fr="🍤 Fruits de mer" data-en="🍤 Seafood" data-ar="🍤 مأكولات بحرية">🍤 Fruits de mer</a>
+    <a href="#chapati" data-fr="🫓 Chapati & Mlawi" data-en="🫓 Chapati & Mlawi" data-ar="🫓 شاباتي وملاوي">🫓 Chapati & Mlawi</a>
+    <a href="#pates" data-fr="🍝 Pâtes" data-en="🍝 Pasta" data-ar="🍝 معكرونة">🍝 Pâtes</a>
+    <a href="#couscous" data-fr="🥘 Couscous" data-en="🥘 Couscous" data-ar="🥘 كسكسي">🥘 Couscous</a>
+    <a href="#salades" data-fr="🥗 Salades" data-en="🥗 Salads" data-ar="🥗 سلطات">🥗 Salades</a>
+    <a href="#desserts" data-fr="🍰 Desserts" data-en="🍰 Desserts" data-ar="🍰 حلويات">🍰 Desserts</a>
+    <a href="#boissons" data-fr="🥤 Boissons" data-en="🥤 Drinks" data-ar="🥤 مشروبات">🥤 Boissons</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- POISSONS -->
+  <section class="msec rev" id="poissons">
+    <div class="msec-head">
+      <div class="ic">🐟</div>
+      <div><h2 data-fr='<span class="g">Poissons</span> grillés' data-en='Grilled <span class="g">fish</span>' data-ar='<span class="g">أسماك</span> مشوية'>Poissons <span class="g">grillés</span></h2>
+      <div class="sub" data-fr="Selon la pêche du jour, au poids" data-en="Depending on the daily catch, by weight" data-ar="حسب صيد اليوم، حسب الوزن">Selon la pêche du jour, au poids</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Daurade royale grillée" data-en="Grilled sea bream" data-ar="دوراد مشوي">Daurade royale grillée</div><div class="ds" data-fr="Huile d'olive, citron, herbes fraîches" data-en="Olive oil, lemon, fresh herbs" data-ar="زيت زيتون، ليمون، أعشاب طازجة">Huile d'olive, citron, herbes fraîches</div></div><span class="dots"></span><span class="pr">32 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Loup de mer (bar)" data-en="Sea bass" data-ar="قاروص">Loup de mer (bar)</div><div class="ds" data-fr="Grillé entier, sauce tastira" data-en="Whole grilled, tastira sauce" data-ar="مشوي كامل، صلصة تستيرة">Grillé entier, sauce tastira</div></div><span class="dots"></span><span class="pr">36 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Rouget de roche" data-en="Red mullet" data-ar="سلطان إبراهيم">Rouget de roche</div><div class="ds" data-fr="Frit ou grillé, citron confit" data-en="Fried or grilled, preserved lemon" data-ar="مقلي أو مشوي، ليمون مخلل">Frit ou grillé, citron confit</div></div><span class="dots"></span><span class="pr">30 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Mérou grillé" data-en="Grilled grouper" data-ar="مناني مشوي">Mérou grillé<span class="tag2" data-fr="Chef" data-en="Chef" data-ar="الشيف">Chef</span></div><div class="ds" data-fr="Poisson noble, sauce vierge aux câpres" data-en="Noble fish, caper vierge sauce" data-ar="سمك فاخر، صلصة بالكبار">Poisson noble, sauce vierge aux câpres</div></div><span class="dots"></span><span class="pr">42 DT</span></div>
+    </div>
+  </section>
+
+  <!-- FRUITS DE MER -->
+  <section class="msec rev" id="fruitsdemer">
+    <div class="msec-head">
+      <div class="ic">🍤</div>
+      <div><h2 data-fr='<span class="g">Fruits</span> de mer' data-en='<span class="g">Sea</span>food' data-ar='<span class="g">مأكولات</span> بحرية'>Fruits <span class="g">de mer</span></h2>
+      <div class="sub" data-fr="Crevettes, calamars et coquillages" data-en="Shrimp, squid and shellfish" data-ar="روبيان، كاليماري ومحار">Crevettes, calamars et coquillages</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Crevettes grillées à l'ail" data-en="Garlic grilled shrimp" data-ar="روبيان مشوي بالثوم">Crevettes grillées à l'ail</div><div class="ds" data-fr="Beurre, ail, persil, citron" data-en="Butter, garlic, parsley, lemon" data-ar="زبدة، ثوم، بقدونس، ليمون">Beurre, ail, persil, citron</div></div><span class="dots"></span><span class="pr">34 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Calamars frits" data-en="Fried calamari" data-ar="كاليماري مقلي">Calamars frits</div><div class="ds" data-fr="Panure croustillante, sauce tartare" data-en="Crispy batter, tartar sauce" data-ar="مقرمش، صلصة تارتار">Panure croustillante, sauce tartare</div></div><span class="dots"></span><span class="pr">28 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Moules à la tunisienne" data-en="Tunisian-style mussels" data-ar="بلح البحر على الطريقة التونسية">Moules à la tunisienne</div><div class="ds" data-fr="Sauce tomate épicée, harissa" data-en="Spiced tomato sauce, harissa" data-ar="صلصة طماطم حارة، هريسة">Sauce tomate épicée, harissa</div></div><span class="dots"></span><span class="pr">24 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Plateau royal de fruits de mer" data-en="Royal seafood platter" data-ar="طبق المأكولات البحرية الملكي">Plateau royal<span class="tag2" data-fr="2 pers." data-en="2 pers." data-ar="لشخصين">2 pers.</span></div><div class="ds" data-fr="Crevettes, calamars, moules, poisson" data-en="Shrimp, squid, mussels, fish" data-ar="روبيان، كاليماري، بلح البحر، سمك">Crevettes, calamars, moules, poisson</div></div><span class="dots"></span><span class="pr">85 DT</span></div>
+    </div>
+  </section>
+
+  <!-- CHAPATI & MLAWI -->
+  <section class="msec rev" id="chapati">
+    <div class="msec-head">
+      <div class="ic">🫓</div>
+      <div><h2 data-fr='<span class="g">Chapati</span> & Mlawi' data-en='<span class="g">Chapati</span> & Mlawi' data-ar='<span class="g">شاباتي</span> وملاوي'>Chapati <span class="g">& Mlawi</span></h2>
+      <div class="sub" data-fr="Pains tunisiens garnis, préparés minute" data-en="Filled Tunisian breads, made to order" data-ar="خبز تونسي محشو، يُحضّر عند الطلب">Pains tunisiens garnis, préparés minute</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Chapati escalope" data-en="Escalope chapati" data-ar="شاباتي إسكالوب">Chapati escalope<span class="tag2" data-fr="★ Populaire" data-en="★ Popular" data-ar="★ الأكثر طلباً">★</span></div><div class="ds" data-fr="Escalope de poulet, fromage, œuf, salade, sauces" data-en="Chicken escalope, cheese, egg, salad, sauces" data-ar="إسكالوب دجاج، جبن، بيض، سلطة، صلصات">Escalope de poulet, fromage, œuf, salade, sauces</div></div><span class="dots"></span><span class="pr">12 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Chapati thon" data-en="Tuna chapati" data-ar="شاباتي تونة">Chapati thon</div><div class="ds" data-fr="Thon, fromage, œuf, harissa, olives" data-en="Tuna, cheese, egg, harissa, olives" data-ar="تونة، جبن، بيض، هريسة، زيتون">Thon, fromage, œuf, harissa, olives</div></div><span class="dots"></span><span class="pr">10 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Mlawi fromage" data-en="Cheese mlawi" data-ar="ملاوي جبن">Mlawi fromage</div><div class="ds" data-fr="Galette feuilletée, fromage fondant" data-en="Flaky flatbread, melted cheese" data-ar="ملاوي مورّق، جبن ذائب">Galette feuilletée, fromage fondant</div></div><span class="dots"></span><span class="pr">8 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Mlawi complet" data-en="Loaded mlawi" data-ar="ملاوي كامل">Mlawi complet</div><div class="ds" data-fr="Escalope ou thon, fromage, œuf, légumes" data-en="Escalope or tuna, cheese, egg, vegetables" data-ar="إسكالوب أو تونة، جبن، بيض، خضار">Escalope ou thon, fromage, œuf, légumes</div></div><span class="dots"></span><span class="pr">13 DT</span></div>
+    </div>
+  </section>
+
+  <!-- PATES -->
+  <section class="msec rev" id="pates">
+    <div class="msec-head">
+      <div class="ic">🍝</div>
+      <div><h2 data-fr='<span class="g">Pâtes</span> & risottos' data-en='<span class="g">Pasta</span> & risotto' data-ar='<span class="g">معكرونة</span> ورز'>Pâtes <span class="g">& risottos</span></h2>
+      <div class="sub" data-fr="Faites maison, à la commande" data-en="Homemade, made to order" data-ar="منزلية، تُحضّر عند الطلب">Faites maison, à la commande</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Pâtes aux crevettes" data-en="Shrimp pasta" data-ar="معكرونة بالروبيان">Pâtes aux crevettes<span class="tag2" data-fr="★ Populaire" data-en="★ Popular" data-ar="★ الأكثر طلباً">★</span></div><div class="ds" data-fr="Linguine, crevettes, sauce tomate épicée" data-en="Linguine, shrimp, spiced tomato sauce" data-ar="لينغويني، روبيان، صلصة طماطم حارة">Linguine, crevettes, sauce tomate épicée</div></div><span class="dots"></span><span class="pr">28 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Spaghetti aux fruits de mer" data-en="Seafood spaghetti" data-ar="سباغيتي بالمأكولات البحرية">Spaghetti aux fruits de mer</div><div class="ds" data-fr="Mélange de la mer, ail et vin blanc" data-en="Mixed seafood, garlic and white wine" data-ar="خليط بحري، ثوم ونبيذ أبيض">Mélange de la mer, ail et vin blanc</div></div><span class="dots"></span><span class="pr">30 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Risotto au poisson" data-en="Fish risotto" data-ar="ريزوتو بالسمك">Risotto au poisson</div><div class="ds" data-fr="Riz crémeux, poisson du jour, safran" data-en="Creamy rice, catch of the day, saffron" data-ar="أرز كريمي، سمك اليوم، زعفران">Riz crémeux, poisson du jour, safran</div></div><span class="dots"></span><span class="pr">26 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Pâtes noires à l'encre de seiche" data-en="Squid ink black pasta" data-ar="معكرونة سوداء بحبر الحبار">Pâtes à l'encre de seiche</div><div class="ds" data-fr="Calamars, huile d'olive, piment" data-en="Squid, olive oil, chili" data-ar="كاليماري، زيت زيتون، فلفل حار">Calamars, huile d'olive, piment</div></div><span class="dots"></span><span class="pr">29 DT</span></div>
+    </div>
+  </section>
+
+  <!-- COUSCOUS -->
+  <section class="msec rev" id="couscous">
+    <div class="msec-head">
+      <div class="ic">🥘</div>
+      <div><h2 data-fr='<span class="g">Couscous</span> & plats' data-en='<span class="g">Couscous</span> & dishes' data-ar='<span class="g">كسكسي</span> وأطباق'>Couscous <span class="g">& plats</span></h2>
+      <div class="sub" data-fr="Grandes spécialités tunisiennes" data-en="Great Tunisian specialties" data-ar="أطباق تونسية أصيلة">Grandes spécialités tunisiennes</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Couscous au poisson" data-en="Fish couscous" data-ar="كسكسي بالحوت">Couscous au poisson<span class="tag2" data-fr="Maison" data-en="House" data-ar="بيتي">Maison</span></div><div class="ds" data-fr="Semoule roulée, légumes, bouillon parfumé" data-en="Hand-rolled semolina, vegetables, broth" data-ar="سميد، خضروات، مرقة معطرة">Semoule roulée, légumes, bouillon parfumé</div></div><span class="dots"></span><span class="pr">30 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Couscous aux fruits de mer" data-en="Seafood couscous" data-ar="كسكسي بالمأكولات البحرية">Couscous aux fruits de mer</div><div class="ds" data-fr="Crevettes, calamars, poisson" data-en="Shrimp, squid, fish" data-ar="روبيان، كاليماري، سمك">Crevettes, calamars, poisson</div></div><span class="dots"></span><span class="pr">38 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Ojja aux crevettes" data-en="Shrimp ojja" data-ar="عجة بالروبيان">Ojja aux crevettes</div><div class="ds" data-fr="Œufs, tomate, harissa, crevettes" data-en="Eggs, tomato, harissa, shrimp" data-ar="بيض، طماطم، هريسة، روبيان">Œufs, tomate, harissa, crevettes</div></div><span class="dots"></span><span class="pr">22 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Complet poisson (kamounia)" data-en="Fish complet" data-ar="كامل بالحوت">Complet poisson</div><div class="ds" data-fr="Assiette complète, salades & accompagnements" data-en="Full plate, salads & sides" data-ar="طبق كامل، سلطات ومقبلات">Assiette complète, salades & accompagnements</div></div><span class="dots"></span><span class="pr">34 DT</span></div>
+    </div>
+  </section>
+
+  <!-- SALADES -->
+  <section class="msec rev" id="salades">
+    <div class="msec-head">
+      <div class="ic">🥗</div>
+      <div><h2 data-fr='<span class="g">Salades</span> & entrées' data-en='<span class="g">Salads</span> & starters' data-ar='<span class="g">سلطات</span> ومقبلات'>Salades <span class="g">& entrées</span></h2>
+      <div class="sub" data-fr="Pour bien commencer le repas" data-en="To start the meal right" data-ar="لبداية جيدة للوجبة">Pour bien commencer le repas</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Salade tunisienne" data-en="Tunisian salad" data-ar="سلطة تونسية">Salade tunisienne</div><div class="ds" data-fr="Tomate, concombre, oignon, thon, œuf" data-en="Tomato, cucumber, onion, tuna, egg" data-ar="طماطم، خيار، بصل، تونة، بيض">Tomate, concombre, oignon, thon, œuf</div></div><span class="dots"></span><span class="pr">12 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Slata mechouia" data-en="Grilled pepper salad" data-ar="سلطة مشوية">Slata mechouia</div><div class="ds" data-fr="Poivrons & tomates grillés, thon" data-en="Grilled peppers & tomatoes, tuna" data-ar="فلفل وطماطم مشوية، تونة">Poivrons & tomates grillés, thon</div></div><span class="dots"></span><span class="pr">11 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Brik à l'œuf & thon" data-en="Tuna & egg brik" data-ar="بريك بالبيض والتونة">Brik à l'œuf</div><div class="ds" data-fr="Feuille croustillante, œuf, thon, câpres" data-en="Crispy pastry, egg, tuna, capers" data-ar="مالسوقة مقرمشة، بيض، تونة، كبار">Feuille croustillante, œuf, thon, câpres</div></div><span class="dots"></span><span class="pr">7 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Salade de poulpe" data-en="Octopus salad" data-ar="سلطة الأخطبوط">Salade de poulpe</div><div class="ds" data-fr="Poulpe, pommes de terre, huile d'olive" data-en="Octopus, potatoes, olive oil" data-ar="أخطبوط، بطاطا، زيت زيتون">Poulpe, pommes de terre, huile d'olive</div></div><span class="dots"></span><span class="pr">18 DT</span></div>
+    </div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section class="msec rev" id="desserts">
+    <div class="msec-head">
+      <div class="ic">🍰</div>
+      <div><h2 data-fr='<span class="g">Desserts</span> maison' data-en='Homemade <span class="g">desserts</span>' data-ar='<span class="g">حلويات</span> منزلية'>Desserts <span class="g">maison</span></h2>
+      <div class="sub" data-fr="La touche sucrée tunisienne" data-en="The Tunisian sweet touch" data-ar="اللمسة الحلوة التونسية">La touche sucrée tunisienne</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Assida zgougou" data-en="Aleppo pine cream" data-ar="عصيدة الزقوقو">Assida zgougou</div><div class="ds" data-fr="Crème de pin d'Alep, fruits secs" data-en="Aleppo pine cream, dried fruits" data-ar="كريمة الزقوقو، فواكه جافة">Crème de pin d'Alep, fruits secs</div></div><span class="dots"></span><span class="pr">9 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Baklawa" data-en="Baklava" data-ar="بقلاوة">Baklawa</div><div class="ds" data-fr="Feuilleté, amandes, miel" data-en="Filo, almonds, honey" data-ar="عجين، لوز، عسل">Feuilleté, amandes, miel</div></div><span class="dots"></span><span class="pr">8 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Bambalouni" data-en="Tunisian doughnut" data-ar="بمبلوني">Bambalouni</div><div class="ds" data-fr="Beignet tunisien, sucre" data-en="Tunisian doughnut, sugar" data-ar="فطيرة تونسية، سكر">Beignet tunisien, sucre</div></div><span class="dots"></span><span class="pr">6 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Salade de fruits frais" data-en="Fresh fruit salad" data-ar="سلطة فواكه طازجة">Salade de fruits frais</div><div class="ds" data-fr="Fruits de saison" data-en="Seasonal fruits" data-ar="فواكه موسمية">Fruits de saison</div></div><span class="dots"></span><span class="pr">8 DT</span></div>
+    </div>
+  </section>
+
+  <!-- BOISSONS -->
+  <section class="msec rev" id="boissons">
+    <div class="msec-head">
+      <div class="ic">🥤</div>
+      <div><h2 data-fr='<span class="g">Boissons</span>' data-en='<span class="g">Drinks</span>' data-ar='<span class="g">مشروبات</span>'>Boissons</h2>
+      <div class="sub" data-fr="Fraîches & chaudes" data-en="Cold & hot" data-ar="باردة وساخنة">Fraîches & chaudes</div></div>
+    </div>
+    <div class="items">
+      <div class="item"><div><div class="nm" data-fr="Eau minérale" data-en="Mineral water" data-ar="ماء معدني">Eau minérale</div><div class="ds" data-fr="Plate ou gazeuse" data-en="Still or sparkling" data-ar="عادي أو غازي">Plate ou gazeuse</div></div><span class="dots"></span><span class="pr">3 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Sodas & jus" data-en="Sodas & juices" data-ar="مشروبات غازية وعصائر">Sodas & jus</div><div class="ds" data-fr="Boissons fraîches variées" data-en="Various cold drinks" data-ar="مشروبات باردة متنوعة">Boissons fraîches variées</div></div><span class="dots"></span><span class="pr">4 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Thé aux pignons" data-en="Pine nut tea" data-ar="شاي بالصنوبر">Thé aux pignons</div><div class="ds" data-fr="Thé à la menthe traditionnel" data-en="Traditional mint tea" data-ar="شاي بالنعناع تقليدي">Thé à la menthe traditionnel</div></div><span class="dots"></span><span class="pr">4 DT</span></div>
+      <div class="item"><div><div class="nm" data-fr="Café / Express" data-en="Coffee / Espresso" data-ar="قهوة / إكسبرس">Café / Express</div><div class="ds" data-fr="Café tunisien" data-en="Tunisian coffee" data-ar="قهوة تونسية">Café tunisien</div></div><span class="dots"></span><span class="pr">3 DT</span></div>
+    </div>
+  </section>
+
+  <p class="note" data-fr="Les prix sont indiqués en Dinars Tunisiens (DT). Menu d'exemple — à personnaliser." data-en="Prices are in Tunisian Dinars (DT). Sample menu — to be customized." data-ar="الأسعار بالدينار التونسي. قائمة تجريبية — قابلة للتخصيص.">Les prix sont indiqués en Dinars Tunisiens (DT). Menu d'exemple — à personnaliser.</p>
+
+  <!-- CTA -->
+  <div class="cta rev">
+    <div class="cta-bg"></div>
+    <div class="cta-in">
+      <h2 data-fr='Envie de <span class="g">réserver</span> ?' data-en='Ready to <span class="g">book</span>?' data-ar='ترغب في <span class="g">الحجز</span>؟'>Envie de <span class="g">réserver</span> ?</h2>
+      <p data-fr="Réservez votre table ou revenez à l'accueil pour découvrir le restaurant." data-en="Book your table or go back home to discover the restaurant." data-ar="احجز طاولتك أو عد إلى الصفحة الرئيسية لاكتشاف المطعم.">Réservez votre table ou revenez à l'accueil pour découvrir le restaurant.</p>
+      <a class="btn btn-main" href="tel:+21600000000">📞 <span data-fr="Réserver" data-en="Book now" data-ar="احجز الآن">Réserver</span></a>
+      <a class="btn btn-out" href="index.html" data-fr="← Accueil" data-en="← Home" data-ar="الرئيسية →">← Accueil</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="zellige"></div>
+<footer>
+  <div class="wrap">
+    <div class="f-logo">
+      <span><span class="g">GA</span>MRA</span>
+    </div>
+    <p data-fr="Salakta, Tunisie · Poissons · Chapati · Mlawi · Pâtes" data-en="Salakta, Tunisia · Fish · Chapati · Mlawi · Pasta" data-ar="سلقطة، تونس · أسماك · شاباتي · ملاوي · معكرونة">Salakta, Tunisie · Poissons · Chapati · Mlawi · Pâtes</p>
+    <div class="f-bottom" data-fr="© 2026 GAMRA — Tous droits réservés" data-en="© 2026 GAMRA — All rights reserved" data-ar="© 2026 قمرة — جميع الحقوق محفوظة">© 2026 GAMRA — Tous droits réservés</div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById("nav");
+  addEventListener("scroll",()=>{ nav.classList.toggle("scrolled",scrollY>30); },{passive:true});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll(".rev").forEach(el=>io.observe(el));
+
+  /* LANGUAGE SWITCHER */
+  (function(){
+    var buttons=document.querySelectorAll(".langsw button");
+    var saved=localStorage.getItem("gamra_lang")||"fr";
+    function setLang(lang){
+      document.querySelectorAll("[data-"+lang+"]").forEach(function(el){
+        el.innerHTML = el.getAttribute("data-"+lang);
+      });
+      document.body.setAttribute("data-lang",lang);
+      document.body.classList.toggle("ar",lang==="ar");
+      document.documentElement.setAttribute("lang",lang);
+      document.documentElement.setAttribute("dir", lang==="ar"?"rtl":"ltr");
+      buttons.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-lang")===lang); });
+      localStorage.setItem("gamra_lang",lang);
+    }
+    buttons.forEach(function(b){ b.addEventListener("click",function(){ setLang(b.getAttribute("data-lang")); }); });
+    setLang(saved);
+  })();
+</script>
+
+</body>
+</html>
