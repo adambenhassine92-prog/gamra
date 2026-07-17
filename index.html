@@ -198,7 +198,16 @@
   @keyframes subIn{to{opacity:.9}}
 
   @media(max-width:900px){ .nav-links a:not(.nav-tel){display:none} .about-in,.contact-in{grid-template-columns:1fr;gap:34px} }
-  @media(max-width:600px){ .wrap{padding:0 20px} }
+  @media(max-width:600px){
+    .wrap{padding:0 20px}
+    nav{padding:13px 0} nav.scrolled{padding:10px 0}
+    .nav-in{gap:10px}
+    .nav-links{gap:9px}
+    .logo{font-size:22px}
+    .nav-tel{font-size:0 !important;padding:11px 13px;gap:0}
+    .nav-tel::before{content:"📞";font-size:15px}
+    .langsw{padding:3px} .langsw button{padding:6px 9px;font-size:11px}
+  }
 </style>
 </head>
 <body>
